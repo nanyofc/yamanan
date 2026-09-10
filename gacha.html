@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>山南自動車 ガチャ</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>山南自動車 GACHA</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -13,827 +19,2393 @@
 }
 
 body{
+
   min-height:100vh;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Noto Sans JP",
-    sans-serif;
+
+  padding:
+  28px 12px
+  60px;
+
   background:
-    radial-gradient(circle at top,#2f343b 0%,#121212 48%,#030303 100%);
+  radial-gradient(
+    circle at top,
+    #282b30 0%,
+    #0d0e10 45%,
+    #020202 100%
+  );
+
   color:#fff;
-  padding:24px 14px 56px;
+
+  font-family:
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  "Noto Sans JP",
+  sans-serif;
+
 }
 
 .wrap{
+
   width:100%;
-  max-width:430px;
-  margin:0 auto;
+
+  max-width:500px;
+
+  margin:auto;
+
   text-align:center;
+
 }
 
+
+/* =====================
+   LOGO
+===================== */
+
 .yamanan-logo{
+
   display:block;
+
   width:90%;
-  max-width:390px;
+
+  max-width:420px;
+
   height:auto;
-  margin:0 auto 14px;
+
+  margin:
+  0 auto
+  18px;
+
 }
 
 .lead{
-  font-size:14px;
-  color:#c7c7c7;
-  margin-bottom:20px;
-  line-height:1.7;
-}
 
-.stock-total{
-  display:inline-block;
   margin-bottom:24px;
-  padding:8px 14px;
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:999px;
-  background:rgba(255,255,255,.05);
-  font-size:13px;
-  color:#ddd;
+
+  color:#bbb;
+
+  font-size:14px;
+
+  line-height:1.8;
+
 }
 
-/* =========================
-   ガチャ本体
-========================= */
 
-.machine{
+/* =====================
+   DASHBOARD
+===================== */
+
+.dashboard{
+
   position:relative;
-  width:320px;
-  height:455px;
-  margin:0 auto;
-  border-radius:38px;
-  border:4px solid #666;
+
+  width:100%;
+
+  max-width:480px;
+
+  margin:auto;
+
+  padding:
+  16px 4px
+  22px;
+
+  overflow:hidden;
+
+  border:
+  2px solid #353535;
+
+  border-radius:34px;
+
   background:
-    linear-gradient(145deg,#404040 0%,#181818 42%,#050505 100%);
+  linear-gradient(
+    180deg,
+    #17191d 0%,
+    #040506 100%
+  );
+
   box-shadow:
-    0 30px 65px rgba(0,0,0,.8),
-    inset 0 0 35px rgba(255,255,255,.05);
+  inset 0 0 35px #000,
+  0 25px 50px rgba(0,0,0,.75);
+
 }
 
-/* メーター */
 
-.meter{
-  position:absolute;
-  left:50%;
-  top:28px;
-  transform:translateX(-50%);
-  width:240px;
-  height:240px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,#181818 0%,#0c0c0c 60%,#000 100%);
-  border:8px solid #181818;
-  box-shadow:
-    0 0 0 4px #777,
-    0 0 0 8px #171717,
-    inset 0 0 35px #000;
-}
+/* 上部ダッシュ曲線 */
 
-.meter::before{
+.dashboard::before{
+
   content:"";
+
   position:absolute;
-  inset:17px;
+
+  top:-80px;
+
+  left:-10%;
+
+  width:120%;
+
+  height:150px;
+
+  border:
+  8px solid #292929;
+
   border-radius:50%;
-  border:4px dashed rgba(255,255,255,.27);
+
+  opacity:.55;
+
 }
 
-.red-zone{
-  position:absolute;
-  right:33px;
-  top:34px;
-  width:54px;
-  height:54px;
-  border-top:6px solid #e50000;
-  transform:rotate(36deg);
-  opacity:.9;
-}
 
-.num{
-  position:absolute;
-  font-size:11px;
-  font-weight:700;
-  color:#ccc;
-  z-index:3;
-}
+.cluster{
 
-.n0{ left:27px; bottom:57px; }
-.n20{ left:18px; top:98px; }
-.n40{ left:46px; top:45px; }
-.n60{ left:108px; top:26px; }
-.n80{ right:46px; top:45px; }
-.n100{ right:15px; top:98px; }
-.n120{ right:24px; bottom:57px; }
+  position:relative;
 
-.meter-title{
-  position:absolute;
-  top:62px;
+  z-index:2;
+
+  display:block;
+
   width:100%;
-  font-size:9px;
-  color:#999;
-  letter-spacing:4px;
-  z-index:5;
+
+  height:auto;
+
 }
 
-.gacha-text{
-  position:absolute;
-  top:88px;
-  width:100%;
-  font-size:30px;
-  font-weight:900;
-  letter-spacing:4px;
-  color:#fff;
-  z-index:20;
-  text-shadow:0 3px 6px #000;
+
+/* =====================
+   GAUGE
+===================== */
+
+.gauge-ring{
+
+  fill:#070809;
+
+  stroke:#888;
+
+  stroke-width:3;
+
+}
+
+.gauge-inner{
+
+  fill:none;
+
+  stroke:#25272a;
+
+  stroke-width:7;
+
+}
+
+.tick-major{
+
+  stroke:#eee;
+
+  stroke-width:3.2;
+
+  stroke-linecap:round;
+
+}
+
+.tick-minor{
+
+  stroke:#777;
+
+  stroke-width:1.4;
+
+  stroke-linecap:round;
+
+}
+
+.number{
+
+  fill:#e7e7e7;
+
+  font-size:13px;
+
+  text-anchor:middle;
+
+}
+
+.small-number{
+
+  fill:#ccc;
+
+  font-size:10px;
+
+  text-anchor:middle;
+
 }
 
 .unit{
-  position:absolute;
-  width:100%;
-  bottom:44px;
-  font-size:10px;
-  letter-spacing:3px;
-  color:#777;
-  z-index:5;
+
+  fill:#999;
+
+  font-size:8px;
+
+  text-anchor:middle;
+
+  letter-spacing:1px;
+
 }
 
-.needle{
-  position:absolute;
-  left:50%;
-  top:124px;
-  width:5px;
-  height:72px;
-  background:#ff2525;
-  border-radius:6px;
-  transform-origin:50% 0;
-  transform:translateX(-50%) rotate(55deg);
-  z-index:4;
-  box-shadow:0 0 7px rgba(255,0,0,.55);
+
+/* =====================
+   NEEDLE
+===================== */
+
+.needle-main{
+
+  stroke:#f6f6f6;
+
+  stroke-width:4;
+
+  stroke-linecap:round;
+
+  filter:
+  drop-shadow(
+    0 2px 2px #000
+  );
+
 }
 
-.needle-center{
+.needle-side{
+
+  stroke:#eee;
+
+  stroke-width:3;
+
+  stroke-linecap:round;
+
+}
+
+.hub-outer{
+
+  fill:#15171b;
+
+  stroke:#454545;
+
+  stroke-width:3;
+
+}
+
+.hub-inner{
+
+  fill:#292c34;
+
+}
+
+
+/* =====================
+   DIGITAL
+===================== */
+
+.digital{
+
   position:absolute;
-  left:50%;
-  top:124px;
-  transform:translate(-50%,-50%);
-  width:26px;
-  height:26px;
-  border-radius:50%;
-  background:linear-gradient(145deg,#eee,#777);
-  border:4px solid #333;
+
   z-index:10;
-}
 
-/* ステアリング */
-
-.steering{
-  position:absolute;
   left:50%;
-  top:300px;
-  transform:translateX(-50%);
-  width:110px;
-  height:110px;
-  border-radius:50%;
-  border:13px solid #050505;
-  background:radial-gradient(circle,#333,#111 60%,#000);
+
+  bottom:29px;
+
+  transform:
+  translateX(-50%);
+
+  min-width:130px;
+
+  padding:
+  8px 14px;
+
+  border:
+  1px solid #333;
+
+  border-radius:5px;
+
+  background:#060708;
+
+  color:#aaa;
+
+  font-family:
+  monospace;
+
+  font-size:12px;
+
+  letter-spacing:2px;
+
   box-shadow:
-    0 9px 18px #000,
-    inset 0 0 10px #555;
+  inset 0 0 9px #000;
+
 }
 
-.steering::before{
-  content:"";
-  position:absolute;
-  width:77px;
-  height:15px;
-  left:3px;
-  top:37px;
-  border-radius:8px;
-  background:#070707;
-  transform:rotate(25deg);
+
+.digital.running{
+
+  color:#eee;
+
 }
 
-.steering::after{
-  content:"";
-  position:absolute;
-  width:77px;
-  height:15px;
-  right:3px;
-  top:37px;
-  border-radius:8px;
-  background:#070707;
-  transform:rotate(-25deg);
+
+.digital.confirm{
+
+  color:#ff3434;
+
+  border-color:#8f0000;
+
+  box-shadow:
+  0 0 15px rgba(255,0,0,.45),
+  inset 0 0 10px #000;
+
+  animation:
+  confirmFlash
+  .45s
+  4;
+
 }
 
-.steering-center{
+
+/* =====================
+   SPEED表示
+===================== */
+
+.speed-display{
+
   position:absolute;
+
+  z-index:7;
+
   left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:43px;
-  height:43px;
-  border-radius:50%;
-  background:linear-gradient(#555,#111);
-  border:3px solid #888;
-  z-index:5;
+
+  top:53%;
+
+  transform:
+  translate(-50%,-50%);
+
+  pointer-events:none;
+
 }
 
-/* タイヤ排出 */
+.speed-number{
 
-.tire{
-  position:absolute;
-  left:50%;
-  bottom:10px;
-  transform:translateX(-50%) scale(0);
-  width:59px;
-  height:59px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,#999 0%,#333 27%,#050505 31%,#111 70%);
-  border:5px solid #222;
-  opacity:0;
-  box-shadow:0 7px 15px #000;
+  display:block;
+
+  font-size:21px;
+
+  font-weight:700;
+
+  color:#ddd;
+
+  line-height:1;
+
 }
 
-.tire::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  width:24px;
-  height:24px;
-  border-radius:50%;
-  background:
-    radial-gradient(circle,#bcbcbc 0%,#666 42%,#2d2d2d 45%,#8c8c8c 52%,#444 100%);
-  border:2px solid #8f8f8f;
+.speed-unit{
+
+  display:block;
+
+  margin-top:3px;
+
+  color:#777;
+
+  font-size:8px;
+
+  letter-spacing:1px;
+
 }
 
-/* ボタン */
+
+/* =====================
+   START BUTTON
+===================== */
 
 .start-button{
+
   width:100%;
-  max-width:320px;
-  margin-top:32px;
-  padding:20px 10px;
+
+  max-width:340px;
+
+  margin-top:30px;
+
+  padding:
+  20px 10px;
+
   border:none;
+
   border-radius:60px;
-  background:linear-gradient(#ff4141,#b90000);
+
+  background:
+  linear-gradient(
+    180deg,
+    #f43c3c,
+    #b60000
+  );
+
   color:#fff;
-  font-size:21px;
+
+  font-size:20px;
+
   font-weight:900;
+
   letter-spacing:2px;
-  cursor:pointer;
+
   box-shadow:
-    0 8px 0 #710000,
-    0 18px 35px rgba(0,0,0,.55);
-  transition:.15s;
+  0 8px 0 #6e0000,
+  0 18px 35px rgba(0,0,0,.55);
+
+  cursor:pointer;
+
 }
+
 
 .start-button:active{
-  transform:translateY(5px);
-  box-shadow:0 3px 0 #710000;
+
+  transform:
+  translateY(5px);
+
+  box-shadow:
+  0 3px 0 #6e0000;
+
 }
+
 
 .start-button:disabled{
-  opacity:.75;
-  cursor:default;
+
+  opacity:.72;
+
 }
+
 
 .start-note{
+
   margin-top:16px;
+
   color:#777;
+
   font-size:10px;
+
   letter-spacing:5px;
+
 }
 
-/* =========================
-   結果
-========================= */
+
+/* =====================
+   RESULT
+===================== */
 
 .result-area{
+
   display:none;
+
   margin-top:30px;
-  padding:24px 18px;
-  background:#fff;
-  color:#111;
+
+  padding:
+  28px 20px
+  24px;
+
   border-radius:26px;
-  box-shadow:0 16px 45px rgba(0,0,0,.65);
+
+  background:#fff;
+
+  color:#111;
+
+  box-shadow:
+  0 18px 50px rgba(0,0,0,.65);
+
 }
+
 
 .result-area.show{
+
   display:block;
-  animation:resultShow .45s ease;
+
+  animation:
+  resultShow
+  .5s ease;
+
 }
 
-.result-title{
-  font-size:16px;
-  font-weight:800;
-  color:#c40000;
+
+.result-grade{
+
+  margin-bottom:9px;
+
+  color:#bd0000;
+
+  font-size:20px;
+
+  font-weight:900;
+
   letter-spacing:2px;
-  margin-bottom:6px;
+
 }
+
 
 .prize-name{
-  font-size:28px;
+
+  margin-bottom:20px;
+
+  font-size:27px;
+
   font-weight:900;
-  line-height:1.35;
-  margin-bottom:18px;
+
+  line-height:1.4;
+
 }
+
+
+/* =====================
+   景品画像
+===================== */
 
 .prize-visual{
-  width:100%;
-  max-width:300px;
-  min-height:160px;
-  margin:0 auto 18px;
-  border-radius:18px;
-  background:
-    linear-gradient(145deg,#f5f5f5,#ececec);
-  border:2px dashed #c8c8c8;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
-  padding:18px;
+
+  width:100%;
+
+  max-width:320px;
+
+  min-height:180px;
+
+  margin:
+  0 auto
+  20px;
+
+  padding:20px;
+
+  border:
+  2px dashed #ccc;
+
+  border-radius:18px;
+
+  background:
+  linear-gradient(
+    145deg,
+    #f5f5f5,
+    #e8e8e8
+  );
+
 }
+
 
 .prize-placeholder{
+
   color:#555;
-  line-height:1.7;
-  font-weight:700;
+
+  font-size:17px;
+
+  font-weight:800;
+
 }
+
 
 .prize-placeholder small{
+
   display:block;
-  margin-top:8px;
-  font-size:12px;
-  font-weight:500;
-  color:#888;
+
+  margin-top:9px;
+
+  color:#999;
+
+  font-size:11px;
+
+  font-weight:400;
+
 }
 
-.prize-note{
-  font-size:14px;
+
+.prize-image{
+
+  display:none;
+
+  width:100%;
+
+  max-height:270px;
+
+  object-fit:contain;
+
+  border-radius:12px;
+
+}
+
+
+.result-note{
+
+  margin-bottom:20px;
+
   color:#555;
+
+  font-size:14px;
+
   line-height:1.8;
-  margin-bottom:18px;
+
 }
 
-.remaining-box{
-  background:#f4f4f4;
-  border-radius:14px;
-  padding:12px;
-  font-size:13px;
-  color:#444;
-  margin-bottom:16px;
-}
+
+/* =====================
+   REDEEM
+===================== */
 
 .redeem-button{
+
   width:100%;
+
+  padding:
+  18px 10px;
+
   border:none;
+
   border-radius:14px;
-  padding:18px 10px;
+
   background:#111;
+
   color:#fff;
+
   font-size:17px;
-  font-weight:800;
+
+  font-weight:900;
+
   cursor:pointer;
+
 }
+
 
 .redeem-button.redeemed{
-  background:#9c9c9c;
-  color:#efefef;
-  cursor:default;
+
+  background:#999;
+
+  color:#eee;
+
 }
+
 
 .staff-note{
-  margin-top:10px;
-  font-size:12px;
-  color:#888;
+
+  margin-top:11px;
+
+  color:#999;
+
+  font-size:11px;
+
 }
 
-/* =========================
-   在庫一覧
-========================= */
 
-.stock-panel{
-  margin-top:24px;
-  padding:18px 16px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:20px;
-  text-align:left;
-  backdrop-filter:blur(6px);
+/* =====================
+   演出
+===================== */
+
+.dashboard.high-prize{
+
+  animation:
+  dashboardGlow
+  .5s
+  4;
+
 }
 
-.stock-panel h3{
-  font-size:15px;
-  margin-bottom:12px;
-  color:#fff;
-}
 
-.stock-list{
-  list-style:none;
-}
+@keyframes dashboardGlow{
 
-.stock-list li{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  gap:12px;
-  padding:10px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  font-size:13px;
-  color:#ddd;
-}
-
-.stock-list li:last-child{
-  border-bottom:none;
-}
-
-.stock-name{
-  flex:1;
-  line-height:1.5;
-}
-
-.stock-count{
-  white-space:nowrap;
-  font-weight:800;
-  color:#fff;
-}
-
-/* =========================
-   アニメーション
-========================= */
-
-.machine.running{
-  animation:machineShake .13s infinite;
-}
-
-.machine.running .steering{
-  animation:steeringSpin .4s linear infinite;
-}
-
-.machine.running .needle{
-  animation:needleMove .35s ease-in-out infinite alternate;
-}
-
-.machine.done .tire{
-  animation:tireDrop .7s cubic-bezier(.3,1.5,.4,1) forwards;
-}
-
-@keyframes machineShake{
   0%{
-    transform:translateX(-2px) rotate(-.3deg);
+
+    box-shadow:
+    inset 0 0 35px #000,
+    0 25px 50px rgba(0,0,0,.75);
+
   }
+
   50%{
-    transform:translateX(2px) rotate(.3deg);
+
+    box-shadow:
+    inset 0 0 40px rgba(170,0,0,.7),
+    0 0 35px rgba(255,0,0,.45);
+
   }
+
   100%{
-    transform:translateX(-2px) rotate(-.3deg);
+
+    box-shadow:
+    inset 0 0 35px #000,
+    0 25px 50px rgba(0,0,0,.75);
+
   }
+
 }
 
-@keyframes steeringSpin{
-  from{
-    transform:translateX(-50%) rotate(0deg);
-  }
-  to{
-    transform:translateX(-50%) rotate(360deg);
-  }
-}
 
-@keyframes needleMove{
-  from{
-    transform:translateX(-50%) rotate(-58deg);
-  }
-  to{
-    transform:translateX(-50%) rotate(58deg);
-  }
-}
+@keyframes confirmFlash{
 
-@keyframes tireDrop{
   0%{
-    opacity:0;
-    transform:translateX(-50%) translateY(-35px) rotate(0deg) scale(.2);
-  }
-  70%{
     opacity:1;
-    transform:translateX(-50%) translateY(6px) rotate(320deg) scale(1.15);
   }
+
+  50%{
+    opacity:.3;
+  }
+
   100%{
     opacity:1;
-    transform:translateX(-50%) translateY(0) rotate(360deg) scale(1);
   }
+
 }
+
 
 @keyframes resultShow{
+
   from{
+
     opacity:0;
-    transform:translateY(20px) scale(.95);
+
+    transform:
+    translateY(20px)
+    scale(.96);
+
   }
+
   to{
+
     opacity:1;
-    transform:translateY(0) scale(1);
+
+    transform:
+    translateY(0)
+    scale(1);
+
   }
+
 }
 
-@media(max-width:360px){
-  .machine{
-    width:292px;
-  }
-
-  .start-button{
-    max-width:292px;
-  }
-
-  .prize-name{
-    font-size:24px;
-  }
-}
 </style>
+
 </head>
+
+
 <body>
+
 
 <div class="wrap">
 
-  <img src="yamanan.png" class="yamanan-logo" alt="山南自動車">
 
-  <div class="lead">
-    LINE友だち登録ありがとうございます。<br>
-    1回抽選にチャレンジできます。
-  </div>
+<!-- =====================
+     山南ロゴ
+===================== -->
 
-  <div class="stock-total" id="stockTotal">
-    残り抽選数：234本
-  </div>
+<img
+src="yamanan.png"
+class="yamanan-logo"
+alt="山南自動車"
+>
 
-  <div class="machine" id="machine">
 
-    <div class="meter">
-      <div class="red-zone"></div>
+<div class="lead">
 
-      <span class="num n0">0</span>
-      <span class="num n20">20</span>
-      <span class="num n40">40</span>
-      <span class="num n60">60</span>
-      <span class="num n80">80</span>
-      <span class="num n100">100</span>
-      <span class="num n120">120</span>
+LINE友だち登録ありがとうございます。<br>
 
-      <div class="meter-title">CHANCE METER</div>
-      <div class="gacha-text">GACHA</div>
-      <div class="unit">km/h</div>
-
-      <div class="needle"></div>
-      <div class="needle-center"></div>
-    </div>
-
-    <div class="steering">
-      <div class="steering-center"></div>
-    </div>
-
-    <div class="tire"></div>
-  </div>
-
-  <button class="start-button" id="startButton">
-    ENGINE START
-  </button>
-
-  <div class="start-note">
-    TAP TO CHALLENGE
-  </div>
-
-  <div class="result-area" id="resultArea">
-    <div class="result-title" id="resultTitle">1等 当選！</div>
-    <div class="prize-name" id="prizeName">JCBギフト券 20,000円</div>
-
-    <div class="prize-visual" id="prizeVisual">
-      <div class="prize-placeholder" id="prizePlaceholder">
-        景品画像 準備中
-        <small>あとで prize1.png ～ prize6.png に差し替え可能</small>
-      </div>
-    </div>
-
-    <div class="prize-note" id="prizeNote">
-      スタッフにこの画面を提示してください。
-    </div>
-
-    <div class="remaining-box" id="remainingBox">
-      この景品の残数：0本<br>
-      全体の残り：0本
-    </div>
-
-    <button class="redeem-button" id="redeemButton">
-      スタッフ確認で引換済みにする
-    </button>
-
-    <div class="staff-note">
-      ※ デモ版です。ページ再読み込みで在庫は初期化されます。
-    </div>
-  </div>
-
-  <div class="stock-panel">
-    <h3>景品残数一覧</h3>
-    <ul class="stock-list" id="stockList"></ul>
-  </div>
+ENGINE STARTを押して
+抽選にチャレンジ！
 
 </div>
 
+
+
+<!-- =====================
+     DASHBOARD
+===================== -->
+
+<div
+class="dashboard"
+id="dashboard"
+>
+
+
+<svg
+class="cluster"
+viewBox="0 0 600 330"
+xmlns="http://www.w3.org/2000/svg"
+>
+
+
+<!-- =====================
+     左 タコメーター
+===================== -->
+
+<circle
+cx="135"
+cy="175"
+r="100"
+class="gauge-ring"
+/>
+
+<circle
+cx="135"
+cy="175"
+r="90"
+class="gauge-inner"
+/>
+
+<g id="leftTicks"></g>
+
+
+<text
+x="135"
+y="120"
+class="unit">
+×1000 r/min
+</text>
+
+
+<g id="leftNeedle">
+
+<line
+x1="135"
+y1="175"
+x2="135"
+y2="100"
+class="needle-side"
+/>
+
+</g>
+
+
+<circle
+cx="135"
+cy="175"
+r="12"
+class="hub-outer"
+/>
+
+<circle
+cx="135"
+cy="175"
+r="7"
+class="hub-inner"
+/>
+
+
+
+<!-- =====================
+     中央スピードメーター
+===================== -->
+
+<circle
+cx="300"
+cy="155"
+r="128"
+class="gauge-ring"
+/>
+
+<circle
+cx="300"
+cy="155"
+r="116"
+class="gauge-inner"
+/>
+
+<g id="mainTicks"></g>
+
+
+<!-- メイン針 -->
+
+<g id="mainNeedle">
+
+<line
+x1="300"
+y1="155"
+x2="300"
+y2="53"
+class="needle-main"
+/>
+
+</g>
+
+
+<circle
+cx="300"
+cy="155"
+r="15"
+class="hub-outer"
+/>
+
+<circle
+cx="300"
+cy="155"
+r="9"
+class="hub-inner"
+/>
+
+
+<text
+x="300"
+y="245"
+fill="#ddd"
+font-size="20"
+text-anchor="middle">
+P
+</text>
+
+
+
+<!-- =====================
+     右 補助メーター
+===================== -->
+
+<circle
+cx="465"
+cy="175"
+r="100"
+class="gauge-ring"
+/>
+
+<circle
+cx="465"
+cy="175"
+r="90"
+class="gauge-inner"
+/>
+
+<g id="rightTicks"></g>
+
+
+<text
+x="465"
+y="120"
+class="unit">
+TEMP / FUEL
+</text>
+
+
+<text
+x="420"
+y="238"
+class="small-number">
+E
+</text>
+
+
+<text
+x="510"
+y="238"
+class="small-number">
+F
+</text>
+
+
+<g id="rightNeedle">
+
+<line
+x1="465"
+y1="175"
+x2="465"
+y2="100"
+class="needle-side"
+/>
+
+</g>
+
+
+<circle
+cx="465"
+cy="175"
+r="12"
+class="hub-outer"
+/>
+
+<circle
+cx="465"
+cy="175"
+r="7"
+class="hub-inner"
+/>
+
+
+</svg>
+
+
+
+<!-- 現在速度 -->
+
+<div class="speed-display">
+
+<span
+class="speed-number"
+id="speedNumber">
+0
+</span>
+
+<span class="speed-unit">
+km/h
+</span>
+
+</div>
+
+
+
+<div
+class="digital"
+id="digital">
+READY
+</div>
+
+
+</div>
+
+
+
+<!-- =====================
+     BUTTON
+===================== -->
+
+<button
+class="start-button"
+id="startButton">
+ENGINE START
+</button>
+
+
+<div class="start-note">
+TAP TO CHALLENGE
+</div>
+
+
+
+<!-- =====================
+     RESULT
+===================== -->
+
+<div
+class="result-area"
+id="resultArea"
+>
+
+
+<div
+class="result-grade"
+id="resultGrade">
+1等 当選！
+</div>
+
+
+<div
+class="prize-name"
+id="prizeName">
+JCBギフト券 20,000円
+</div>
+
+
+
+<div class="prize-visual">
+
+
+<img
+id="prizeImage"
+class="prize-image"
+alt="景品"
+>
+
+
+<div
+id="prizePlaceholder"
+class="prize-placeholder">
+
+景品画像 準備中
+
+<small>
+後から画像を追加できます
+</small>
+
+</div>
+
+
+</div>
+
+
+
+<div
+class="result-note"
+id="resultNote">
+スタッフにこの画面を提示してください。
+</div>
+
+
+
+<button
+class="redeem-button"
+id="redeemButton">
+スタッフ確認で引換済みにする
+</button>
+
+
+<div class="staff-note">
+※ 現在は動作確認用デモです
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
 <script>
+
+
+/* =========================
+   景品設定
+========================= */
+
 const prizes = [
-  {
-    id: 1,
-    grade: "1等",
-    name: "JCBギフト券 20,000円",
-    count: 1,
-    note: "高額景品です。スタッフ確認後にお渡しください。",
-    image: ""
-  },
-  {
-    id: 2,
-    grade: "2等",
-    name: "商品券 5,000円",
-    count: 3,
-    note: "スタッフ確認後にお渡しください。",
-    image: ""
-  },
-  {
-    id: 3,
-    grade: "3等",
-    name: "エンジンオイル交換無料券",
-    count: 5,
-    note: "5Lまで対象です。内容確認のうえお渡しください。",
-    image: ""
-  },
-  {
-    id: 4,
-    grade: "4等",
-    name: "山形食品ジュース 5缶セット",
-    count: 10,
-    note: "1,500円相当の景品です。",
-    image: ""
-  },
-  {
-    id: 5,
-    grade: "5等",
-    name: "Hanamori お食事券 1,000円分",
-    count: 15,
-    note: "利用条件がある場合はスタッフからご案内ください。",
-    image: ""
-  },
-  {
-    id: 6,
-    grade: "6等",
-    name: "Hanamori ドリンク券",
-    count: 200,
-    note: "当日限り有効です。",
-    image: ""
-  }
+
+{
+
+grade:"1等",
+
+name:
+"JCBギフト券 20,000円",
+
+weight:1,
+
+speed:120,
+
+image:
+"prize1.png",
+
+note:
+"スタッフにこの画面を提示してください。"
+
+},
+
+
+{
+
+grade:"2等",
+
+name:
+"商品券 5,000円",
+
+weight:3,
+
+speed:110,
+
+image:
+"prize2.png",
+
+note:
+"スタッフにこの画面を提示してください。"
+
+},
+
+
+{
+
+grade:"3等",
+
+name:
+"エンジンオイル交換無料券",
+
+weight:5,
+
+speed:100,
+
+image:
+"prize3.png",
+
+note:
+"5Lまで対象です。スタッフにこの画面を提示してください。"
+
+},
+
+
+{
+
+grade:"4等",
+
+name:
+"山形食品ジュース 5缶セット",
+
+weight:10,
+
+speed:60,
+
+image:
+"prize4.png",
+
+note:
+"1,500円相当。スタッフにこの画面を提示してください。"
+
+},
+
+
+{
+
+grade:"5等",
+
+name:
+"Hanamori お食事券 1,000円分",
+
+weight:15,
+
+speed:40,
+
+image:
+"prize5.png",
+
+note:
+"スタッフにこの画面を提示してください。"
+
+},
+
+
+{
+
+grade:"6等",
+
+name:
+"Hanamori ドリンク券",
+
+weight:200,
+
+speed:20,
+
+image:
+"prize6.png",
+
+note:
+"当日限り有効です。スタッフにこの画面を提示してください。"
+
+}
+
 ];
 
-const machine = document.getElementById("machine");
-const startButton = document.getElementById("startButton");
-const resultArea = document.getElementById("resultArea");
-const resultTitle = document.getElementById("resultTitle");
-const prizeName = document.getElementById("prizeName");
-const prizeNote = document.getElementById("prizeNote");
-const remainingBox = document.getElementById("remainingBox");
-const redeemButton = document.getElementById("redeemButton");
-const stockTotal = document.getElementById("stockTotal");
-const stockList = document.getElementById("stockList");
 
-let currentPrize = null;
 
-function getTotalRemaining(){
-  return prizes.reduce((sum, prize) => sum + prize.count, 0);
+/* =========================
+   目盛り
+========================= */
+
+function makeTicks(
+groupId,
+cx,
+cy,
+radius,
+start,
+end,
+majorCount,
+subdivisions,
+labels
+){
+
+const group =
+document.getElementById(
+groupId
+);
+
+
+const total =
+majorCount *
+subdivisions;
+
+
+for(
+let i=0;
+i<=total;
+i++
+){
+
+const ratio =
+i / total;
+
+
+const angle =
+start +
+(end-start)
+*
+ratio;
+
+
+const rad =
+(angle-90)
+*
+Math.PI
+/
+180;
+
+
+const major =
+i %
+subdivisions
+===
+0;
+
+
+const outer =
+radius;
+
+
+const inner =
+radius -
+(
+major
+?
+14
+:
+7
+);
+
+
+const x1 =
+cx +
+outer *
+Math.cos(rad);
+
+
+const y1 =
+cy +
+outer *
+Math.sin(rad);
+
+
+const x2 =
+cx +
+inner *
+Math.cos(rad);
+
+
+const y2 =
+cy +
+inner *
+Math.sin(rad);
+
+
+const line =
+document.createElementNS(
+"http://www.w3.org/2000/svg",
+"line"
+);
+
+
+line.setAttribute(
+"x1",
+x1
+);
+
+line.setAttribute(
+"y1",
+y1
+);
+
+line.setAttribute(
+"x2",
+x2
+);
+
+line.setAttribute(
+"y2",
+y2
+);
+
+
+line.setAttribute(
+"class",
+major
+?
+"tick-major"
+:
+"tick-minor"
+);
+
+
+group.appendChild(
+line
+);
+
+
+
+if(
+major &&
+labels
+){
+
+const index =
+i /
+subdivisions;
+
+
+if(
+labels[index]
+!== undefined
+){
+
+const tr =
+radius - 31;
+
+
+const tx =
+cx +
+tr *
+Math.cos(rad);
+
+
+const ty =
+cy +
+tr *
+Math.sin(rad)
++
+5;
+
+
+const text =
+document.createElementNS(
+"http://www.w3.org/2000/svg",
+"text"
+);
+
+
+text.setAttribute(
+"x",
+tx
+);
+
+text.setAttribute(
+"y",
+ty
+);
+
+text.setAttribute(
+"class",
+"number"
+);
+
+
+text.textContent =
+labels[index];
+
+
+group.appendChild(
+text
+);
+
 }
 
-function updateTotalDisplay(){
-  stockTotal.textContent = `残り抽選数：${getTotalRemaining()}本`;
 }
 
-function renderStockList(){
-  stockList.innerHTML = "";
-
-  prizes.forEach(prize => {
-    const li = document.createElement("li");
-
-    const name = document.createElement("div");
-    name.className = "stock-name";
-    name.textContent = `${prize.grade}：${prize.name}`;
-
-    const count = document.createElement("div");
-    count.className = "stock-count";
-    count.textContent = `残り ${prize.count}本`;
-
-    li.appendChild(name);
-    li.appendChild(count);
-    stockList.appendChild(li);
-  });
-
-  updateTotalDisplay();
 }
 
-function getAvailablePrizes(){
-  return prizes.filter(prize => prize.count > 0);
 }
 
-function weightedRandomPrize(){
-  const pool = [];
 
-  prizes.forEach(prize => {
-    for(let i = 0; i < prize.count; i++){
-      pool.push(prize);
-    }
-  });
 
-  if(pool.length === 0){
-    return null;
-  }
+/* 中央 */
 
-  const randomIndex = Math.floor(Math.random() * pool.length);
-  return pool[randomIndex];
+makeTicks(
+
+"mainTicks",
+
+300,
+
+155,
+
+108,
+
+-125,
+
+125,
+
+9,
+
+4,
+
+[
+"0",
+"20",
+"40",
+"60",
+"80",
+"100",
+"120",
+"140",
+"160",
+"180"
+]
+
+);
+
+
+
+/* 左 */
+
+makeTicks(
+
+"leftTicks",
+
+135,
+
+175,
+
+82,
+
+-130,
+
+130,
+
+6,
+
+4,
+
+[
+"0",
+"1",
+"2",
+"3",
+"4",
+"5",
+"6"
+]
+
+);
+
+
+
+/* 右 */
+
+makeTicks(
+
+"rightTicks",
+
+465,
+
+175,
+
+82,
+
+-130,
+
+130,
+
+6,
+
+4,
+
+null
+
+);
+
+
+
+/* =========================
+   DOM
+========================= */
+
+const dashboard =
+document.getElementById(
+"dashboard"
+);
+
+
+const mainNeedle =
+document.getElementById(
+"mainNeedle"
+);
+
+
+const leftNeedle =
+document.getElementById(
+"leftNeedle"
+);
+
+
+const rightNeedle =
+document.getElementById(
+"rightNeedle"
+);
+
+
+const startButton =
+document.getElementById(
+"startButton"
+);
+
+
+const digital =
+document.getElementById(
+"digital"
+);
+
+
+const speedNumber =
+document.getElementById(
+"speedNumber"
+);
+
+
+const resultArea =
+document.getElementById(
+"resultArea"
+);
+
+
+const resultGrade =
+document.getElementById(
+"resultGrade"
+);
+
+
+const prizeName =
+document.getElementById(
+"prizeName"
+);
+
+
+const resultNote =
+document.getElementById(
+"resultNote"
+);
+
+
+const prizeImage =
+document.getElementById(
+"prizeImage"
+);
+
+
+const prizePlaceholder =
+document.getElementById(
+"prizePlaceholder"
+);
+
+
+const redeemButton =
+document.getElementById(
+"redeemButton"
+);
+
+
+
+/* =========================
+   針設定
+========================= */
+
+function speedToAngle(
+speed
+){
+
+return
+-125 +
+(
+speed /
+180
+)
+*
+250;
+
 }
 
-function showResult(prize){
-  currentPrize = prize;
 
-  resultTitle.textContent = `${prize.grade} 当選！`;
-  prizeName.textContent = prize.name;
-  prizeNote.textContent = `${prize.note} スタッフにこの画面を提示してください。`;
+function setMainSpeed(
+speed
+){
 
-  remainingBox.innerHTML =
-    `この景品の残数：${prize.count}本<br>全体の残り：${getTotalRemaining()}本`;
+const angle =
+speedToAngle(
+speed
+);
 
-  redeemButton.disabled = false;
-  redeemButton.classList.remove("redeemed");
-  redeemButton.textContent = "スタッフ確認で引換済みにする";
 
-  resultArea.classList.add("show");
+mainNeedle.setAttribute(
+
+"transform",
+
+`rotate(${angle} 300 155)`
+
+);
+
+
+speedNumber.textContent =
+Math.round(
+speed
+);
+
 }
 
-function soldOutState(){
-  startButton.disabled = true;
-  startButton.textContent = "抽選終了";
+
+function setLeft(
+angle
+){
+
+leftNeedle.setAttribute(
+
+"transform",
+
+`rotate(${angle} 135 175)`
+
+);
+
 }
 
-startButton.addEventListener("click", function(){
-  if(getTotalRemaining() <= 0){
-    soldOutState();
-    return;
-  }
 
-  resultArea.classList.remove("show");
-  machine.classList.remove("done");
+function setRight(
+angle
+){
 
-  startButton.disabled = true;
-  startButton.textContent = "ENGINE RUNNING...";
+rightNeedle.setAttribute(
 
-  machine.classList.add("running");
+"transform",
 
-  setTimeout(() => {
-    machine.classList.remove("running");
-    machine.classList.add("done");
+`rotate(${angle} 465 175)`
 
-    const selectedPrize = weightedRandomPrize();
+);
 
-    if(!selectedPrize){
-      soldOutState();
-      return;
-    }
+}
 
-    selectedPrize.count -= 1;
-    renderStockList();
-    showResult(selectedPrize);
 
-    setTimeout(() => {
-      if(getTotalRemaining() > 0){
-        startButton.disabled = false;
-        startButton.textContent = "TRY AGAIN";
-      }else{
-        soldOutState();
-      }
-    }, 500);
 
-  }, 2400);
+/* 初期位置 */
+
+setMainSpeed(
+0
+);
+
+setLeft(
+-115
+);
+
+setRight(
+35
+);
+
+
+
+/* =========================
+   抽選
+========================= */
+
+function drawPrize(){
+
+let total =
+0;
+
+
+prizes.forEach(
+prize => {
+
+total +=
+prize.weight;
+
+}
+);
+
+
+let random =
+Math.random()
+*
+total;
+
+
+for(
+const prize
+of prizes
+){
+
+random -=
+prize.weight;
+
+
+if(
+random < 0
+){
+
+return prize;
+
+}
+
+}
+
+
+return prizes[
+prizes.length-1
+];
+
+}
+
+
+
+/* =========================
+   イージング
+
+   最初ゆっくり
+   中盤加速
+   最後ゆっくり
+========================= */
+
+function easeInOutCubic(
+t
+){
+
+return
+t < 0.5
+
+?
+
+4 *
+t *
+t *
+t
+
+:
+
+1 -
+Math.pow(
+-2*t+2,
+3
+)
+/
+2;
+
+}
+
+
+
+/* =========================
+   メーター演出
+========================= */
+
+function animateToSpeed(
+targetSpeed,
+duration
+){
+
+return new Promise(
+resolve => {
+
+
+const startTime =
+performance.now();
+
+
+const startSpeed =
+0;
+
+
+function frame(
+now
+){
+
+const elapsed =
+now -
+startTime;
+
+
+const progress =
+Math.min(
+elapsed /
+duration,
+1
+);
+
+
+const eased =
+easeInOutCubic(
+progress
+);
+
+
+const currentSpeed =
+startSpeed +
+(
+targetSpeed -
+startSpeed
+)
+*
+eased;
+
+
+setMainSpeed(
+currentSpeed
+);
+
+
+
+/*
+  左タコメーターも
+  徐々に上がる
+*/
+
+const leftTarget =
+-115 +
+(
+targetSpeed /
+120
+)
+*
+135;
+
+
+const leftCurrent =
+-115 +
+(
+leftTarget + 115
+)
+*
+eased;
+
+
+setLeft(
+leftCurrent
+);
+
+
+
+/*
+  右はほんの少しだけ
+*/
+
+const rightTarget =
+35 +
+(
+targetSpeed /
+120
+)
+*
+18;
+
+
+const rightCurrent =
+35 +
+(
+rightTarget - 35
+)
+*
+eased;
+
+
+setRight(
+rightCurrent
+);
+
+
+
+if(
+progress < 1
+){
+
+requestAnimationFrame(
+frame
+);
+
+}
+
+else{
+
+setMainSpeed(
+targetSpeed
+);
+
+
+setLeft(
+leftTarget
+);
+
+
+setRight(
+rightTarget
+);
+
+
+resolve();
+
+}
+
+}
+
+
+requestAnimationFrame(
+frame
+);
+
+
+}
+);
+
+}
+
+
+
+/* =========================
+   確定演出
+========================= */
+
+function confirmationEffect(
+prize
+){
+
+return new Promise(
+resolve => {
+
+
+/*
+  1〜3等だけ
+  強い確定演出
+*/
+
+if(
+prize.speed >= 100
+){
+
+digital.textContent =
+prize.grade +
+" 確定！";
+
+
+digital.classList.add(
+"confirm"
+);
+
+
+dashboard.classList.add(
+"high-prize"
+);
+
+
+setTimeout(
+function(){
+
+
+digital.classList.remove(
+"confirm"
+);
+
+
+dashboard.classList.remove(
+"high-prize"
+);
+
+
+resolve();
+
+
+},
+1900
+);
+
+}
+
+
+/*
+  4〜6等
+*/
+
+else{
+
+digital.textContent =
+prize.grade +
+"！";
+
+
+setTimeout(
+resolve,
+900
+);
+
+}
+
+
+}
+);
+
+}
+
+
+
+/* =========================
+   結果表示
+========================= */
+
+function showResult(
+prize
+){
+
+resultGrade.textContent =
+prize.grade +
+" 当選！";
+
+
+prizeName.textContent =
+prize.name;
+
+
+resultNote.textContent =
+prize.note;
+
+
+
+/* 景品画像 */
+
+prizeImage.style.display =
+"none";
+
+
+prizePlaceholder.style.display =
+"block";
+
+
+prizeImage.src =
+prize.image;
+
+
+prizeImage.onload =
+function(){
+
+prizePlaceholder.style.display =
+"none";
+
+
+prizeImage.style.display =
+"block";
+
+};
+
+
+
+resultArea
+.classList
+.add(
+"show"
+);
+
+
+setTimeout(
+function(){
+
+resultArea
+.scrollIntoView({
+
+behavior:
+"smooth",
+
+block:
+"start"
+
 });
 
-redeemButton.addEventListener("click", function(){
-  if(!currentPrize){
-    return;
-  }
+},
+250
+);
 
-  redeemButton.disabled = true;
-  redeemButton.classList.add("redeemed");
-  redeemButton.textContent = "引換済み";
-});
+}
 
-renderStockList();
+
+
+/* =========================
+   START
+========================= */
+
+startButton.addEventListener(
+"click",
+async function(){
+
+
+/* 前回結果を消す */
+
+resultArea
+.classList
+.remove(
+"show"
+);
+
+
+digital
+.classList
+.remove(
+"confirm"
+);
+
+
+dashboard
+.classList
+.remove(
+"high-prize"
+);
+
+
+redeemButton.disabled =
+false;
+
+
+redeemButton
+.classList
+.remove(
+"redeemed"
+);
+
+
+redeemButton.textContent =
+"スタッフ確認で引換済みにする";
+
+
+
+/* 初期位置 */
+
+setMainSpeed(
+0
+);
+
+setLeft(
+-115
+);
+
+setRight(
+35
+);
+
+
+
+/* 先に当選景品を決定 */
+
+const prize =
+drawPrize();
+
+
+
+/* スタート */
+
+startButton.disabled =
+true;
+
+
+startButton.textContent =
+"ENGINE RUNNING...";
+
+
+digital.textContent =
+"ACCELERATING";
+
+
+digital.classList.add(
+"running"
+);
+
+
+
+/*
+  4.2秒かけて
+  当選位置へ
+*/
+
+await animateToSpeed(
+
+prize.speed,
+
+4200
+
+);
+
+
+
+digital.classList.remove(
+"running"
+);
+
+
+
+/*
+  針停止後
+  少し間を置く
+*/
+
+await new Promise(
+resolve =>
+setTimeout(
+resolve,
+450
+)
+);
+
+
+
+/*
+  確定演出
+*/
+
+await confirmationEffect(
+prize
+);
+
+
+
+/*
+  RESULT
+*/
+
+digital.textContent =
+"RESULT";
+
+
+await new Promise(
+resolve =>
+setTimeout(
+resolve,
+350
+)
+);
+
+
+
+showResult(
+prize
+);
+
+
+
+/*
+  デモなので再度可能
+*/
+
+startButton.disabled =
+false;
+
+
+startButton.textContent =
+"DEMO AGAIN";
+
+
+}
+);
+
+
+
+/* =========================
+   引換
+========================= */
+
+redeemButton.addEventListener(
+"click",
+function(){
+
+
+redeemButton.disabled =
+true;
+
+
+redeemButton
+.classList
+.add(
+"redeemed"
+);
+
+
+redeemButton.textContent =
+"引換済み";
+
+
+}
+);
+
+
 </script>
+
+
 </body>
+
 </html>
