@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>山南自動車 GACHA</title>
+<title>山南自動車 ガチャ</title>
 
 <style>
 *{
@@ -19,45 +18,46 @@ body{
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
+    "Noto Sans JP",
     sans-serif;
-
   background:
-    radial-gradient(circle at top,#343a40 0%,#111 58%,#050505 100%);
-
+    radial-gradient(circle at top,#2f343b 0%,#121212 48%,#030303 100%);
   color:#fff;
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  padding:24px 14px;
+  padding:24px 14px 56px;
 }
 
 .wrap{
   width:100%;
   max-width:430px;
+  margin:0 auto;
   text-align:center;
 }
 
-.brand{
-  font-size:13px;
-  letter-spacing:4px;
-  opacity:.7;
-  margin-bottom:8px;
-}
-
-h1{
-  font-size:30px;
-  letter-spacing:2px;
-  margin-bottom:6px;
+.yamanan-logo{
+  display:block;
+  width:90%;
+  max-width:390px;
+  height:auto;
+  margin:0 auto 14px;
 }
 
 .lead{
   font-size:14px;
-  opacity:.78;
-  margin-bottom:24px;
+  color:#c7c7c7;
+  margin-bottom:20px;
+  line-height:1.7;
 }
 
+.stock-total{
+  display:inline-block;
+  margin-bottom:24px;
+  padding:8px 14px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  background:rgba(255,255,255,.05);
+  font-size:13px;
+  color:#ddd;
+}
 
 /* =========================
    ガチャ本体
@@ -65,719 +65,775 @@ h1{
 
 .machine{
   position:relative;
-
   width:320px;
-  height:430px;
-
+  height:455px;
   margin:0 auto;
-
-  border-radius:34px;
-
+  border-radius:38px;
+  border:4px solid #666;
   background:
-    linear-gradient(
-      145deg,
-      #4b4b4b,
-      #1a1a1a 48%,
-      #070707
-    );
-
-  border:3px solid #5b5b5b;
-
+    linear-gradient(145deg,#404040 0%,#181818 42%,#050505 100%);
   box-shadow:
-    0 24px 60px rgba(0,0,0,.7),
-    inset 0 0 28px rgba(255,255,255,.05);
+    0 30px 65px rgba(0,0,0,.8),
+    inset 0 0 35px rgba(255,255,255,.05);
 }
 
-
-/* =========================
-   スピードメーター風
-========================= */
+/* メーター */
 
 .meter{
   position:absolute;
-
   left:50%;
   top:28px;
-
   transform:translateX(-50%);
-
-  width:228px;
-  height:228px;
-
+  width:240px;
+  height:240px;
   border-radius:50%;
-
   background:
-    radial-gradient(
-      circle,
-      #141414 51%,
-      #272727 52%,
-      #090909 70%
-    );
-
-  border:8px solid #202020;
-
+    radial-gradient(circle,#181818 0%,#0c0c0c 60%,#000 100%);
+  border:8px solid #181818;
   box-shadow:
-    0 0 0 3px #777,
-    inset 0 0 30px #000;
+    0 0 0 4px #777,
+    0 0 0 8px #171717,
+    inset 0 0 35px #000;
 }
 
 .meter::before{
   content:"";
-
   position:absolute;
-
-  inset:14px;
-
+  inset:17px;
   border-radius:50%;
-
-  border:
-    4px dashed
-    rgba(255,255,255,.24);
+  border:4px dashed rgba(255,255,255,.27);
 }
 
-.meterTitle{
+.red-zone{
   position:absolute;
+  right:33px;
+  top:34px;
+  width:54px;
+  height:54px;
+  border-top:6px solid #e50000;
+  transform:rotate(36deg);
+  opacity:.9;
+}
 
-  top:60px;
-
-  width:100%;
-
+.num{
+  position:absolute;
   font-size:11px;
-
-  letter-spacing:3px;
-
-  opacity:.58;
-}
-
-.gachaText{
-  position:absolute;
-
-  top:92px;
-
-  width:100%;
-
-  font-size:30px;
-  font-weight:900;
-
-  letter-spacing:3px;
-}
-
-.rpm{
-  position:absolute;
-
-  bottom:42px;
-
-  width:100%;
-
-  font-size:10px;
-
-  letter-spacing:3px;
-
-  opacity:.52;
-}
-
-
-/* =========================
-   メーター針
-========================= */
-
-.needle{
-  position:absolute;
-
-  left:50%;
-  top:44px;
-
-  width:6px;
-  height:78px;
-
-  border-radius:6px;
-
-  background:#ff3535;
-
-  transform-origin:50% 70px;
-
-  transform:
-    translateX(-50%)
-    rotate(-125deg);
-}
-
-.needle::after{
-  content:"";
-
-  position:absolute;
-
-  left:50%;
-  bottom:-4px;
-
-  transform:translateX(-50%);
-
-  width:20px;
-  height:20px;
-
-  border-radius:50%;
-
-  background:#ddd;
-
-  border:6px solid #333;
-}
-
-
-/* =========================
-   ステアリング
-========================= */
-
-.wheel{
-  position:absolute;
-
-  left:50%;
-  top:270px;
-
-  transform:translateX(-50%);
-
-  width:104px;
-  height:104px;
-
-  border-radius:50%;
-
-  border:12px solid #050505;
-
-  box-shadow:
-    0 4px 10px #000,
-    inset 0 0 5px #555;
-}
-
-.wheel::before,
-.wheel::after{
-  content:"";
-
-  position:absolute;
-
-  top:39px;
-
-  width:60px;
-  height:13px;
-
-  background:#080808;
-}
-
-.wheel::before{
-  left:-5px;
-
-  transform:rotate(30deg);
-}
-
-.wheel::after{
-  right:-5px;
-
-  transform:rotate(-30deg);
-}
-
-.wheelCenter{
-  position:absolute;
-
-  left:50%;
-  top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
-  width:40px;
-  height:40px;
-
-  border-radius:50%;
-
-  background:
-    linear-gradient(
-      #505050,
-      #111
-    );
-
-  border:3px solid #777;
-
+  font-weight:700;
+  color:#ccc;
   z-index:3;
 }
 
+.n0{ left:27px; bottom:57px; }
+.n20{ left:18px; top:98px; }
+.n40{ left:46px; top:45px; }
+.n60{ left:108px; top:26px; }
+.n80{ right:46px; top:45px; }
+.n100{ right:15px; top:98px; }
+.n120{ right:24px; bottom:57px; }
 
-/* =========================
-   タイヤ風カプセル
-========================= */
-
-.capsule{
+.meter-title{
   position:absolute;
+  top:62px;
+  width:100%;
+  font-size:9px;
+  color:#999;
+  letter-spacing:4px;
+  z-index:5;
+}
 
+.gacha-text{
+  position:absolute;
+  top:88px;
+  width:100%;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:4px;
+  color:#fff;
+  z-index:20;
+  text-shadow:0 3px 6px #000;
+}
+
+.unit{
+  position:absolute;
+  width:100%;
+  bottom:44px;
+  font-size:10px;
+  letter-spacing:3px;
+  color:#777;
+  z-index:5;
+}
+
+.needle{
+  position:absolute;
   left:50%;
-  bottom:11px;
-
-  transform:
-    translateX(-50%)
-    scale(0);
-
-  width:56px;
-  height:56px;
-
-  border-radius:50%;
-
-  opacity:0;
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #fff,
-      #ddd 14%,
-      #454545 16%,
-      #111 66%
-    );
-
-  border:5px solid #222;
+  top:124px;
+  width:5px;
+  height:72px;
+  background:#ff2525;
+  border-radius:6px;
+  transform-origin:50% 0;
+  transform:translateX(-50%) rotate(55deg);
+  z-index:4;
+  box-shadow:0 0 7px rgba(255,0,0,.55);
 }
 
-.capsule::before{
-  content:"";
-
+.needle-center{
   position:absolute;
-
-  inset:7px;
-
+  left:50%;
+  top:124px;
+  transform:translate(-50%,-50%);
+  width:26px;
+  height:26px;
   border-radius:50%;
-
-  border:5px solid #333;
+  background:linear-gradient(145deg,#eee,#777);
+  border:4px solid #333;
+  z-index:10;
 }
 
-.capsule::after{
-  content:"";
+/* ステアリング */
 
+.steering{
   position:absolute;
+  left:50%;
+  top:300px;
+  transform:translateX(-50%);
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  border:13px solid #050505;
+  background:radial-gradient(circle,#333,#111 60%,#000);
+  box-shadow:
+    0 9px 18px #000,
+    inset 0 0 10px #555;
+}
 
+.steering::before{
+  content:"";
+  position:absolute;
+  width:77px;
+  height:15px;
+  left:3px;
+  top:37px;
+  border-radius:8px;
+  background:#070707;
+  transform:rotate(25deg);
+}
+
+.steering::after{
+  content:"";
+  position:absolute;
+  width:77px;
+  height:15px;
+  right:3px;
+  top:37px;
+  border-radius:8px;
+  background:#070707;
+  transform:rotate(-25deg);
+}
+
+.steering-center{
+  position:absolute;
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
-  width:34px;
-  height:8px;
-
-  border-radius:5px;
-
-  background:#777;
+  transform:translate(-50%,-50%);
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  background:linear-gradient(#555,#111);
+  border:3px solid #888;
+  z-index:5;
 }
 
+/* タイヤ排出 */
 
-/* =========================
-   ENGINE STARTボタン
-========================= */
+.tire{
+  position:absolute;
+  left:50%;
+  bottom:10px;
+  transform:translateX(-50%) scale(0);
+  width:59px;
+  height:59px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,#999 0%,#333 27%,#050505 31%,#111 70%);
+  border:5px solid #222;
+  opacity:0;
+  box-shadow:0 7px 15px #000;
+}
 
-.start{
-  margin-top:30px;
+.tire::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,#bcbcbc 0%,#666 42%,#2d2d2d 45%,#8c8c8c 52%,#444 100%);
+  border:2px solid #8f8f8f;
+}
 
+/* ボタン */
+
+.start-button{
   width:100%;
   max-width:320px;
-
+  margin-top:32px;
+  padding:20px 10px;
   border:none;
-
-  border-radius:50px;
-
-  padding:20px;
-
+  border-radius:60px;
+  background:linear-gradient(#ff4141,#b90000);
   color:#fff;
-
-  font-size:20px;
+  font-size:21px;
   font-weight:900;
-
   letter-spacing:2px;
-
-  background:
-    linear-gradient(
-      #ff4848,
-      #b40000
-    );
-
-  box-shadow:
-    0 7px 0 #650000,
-    0 15px 30px rgba(0,0,0,.45);
-
   cursor:pointer;
-}
-
-.start:active{
-  transform:translateY(5px);
-
   box-shadow:
-    0 2px 0 #650000;
+    0 8px 0 #710000,
+    0 18px 35px rgba(0,0,0,.55);
+  transition:.15s;
 }
 
-.start:disabled{
+.start-button:active{
+  transform:translateY(5px);
+  box-shadow:0 3px 0 #710000;
+}
+
+.start-button:disabled{
+  opacity:.75;
   cursor:default;
 }
 
-.note{
-  margin-top:14px;
-
+.start-note{
+  margin-top:16px;
+  color:#777;
   font-size:10px;
-
-  letter-spacing:4px;
-
-  opacity:.58;
+  letter-spacing:5px;
 }
-
 
 /* =========================
    結果
 ========================= */
 
-.result{
+.result-area{
   display:none;
-
-  margin-top:24px;
-
-  padding:24px;
-
-  border-radius:20px;
-
+  margin-top:30px;
+  padding:24px 18px;
   background:#fff;
-
   color:#111;
-
-  box-shadow:
-    0 14px 40px
-    rgba(0,0,0,.5);
+  border-radius:26px;
+  box-shadow:0 16px 45px rgba(0,0,0,.65);
 }
 
-.result.show{
+.result-area.show{
   display:block;
-
-  animation:
-    show
-    .5s ease;
+  animation:resultShow .45s ease;
 }
 
-.result h2{
+.result-title{
+  font-size:16px;
+  font-weight:800;
+  color:#c40000;
+  letter-spacing:2px;
+  margin-bottom:6px;
+}
+
+.prize-name{
   font-size:28px;
-
-  margin-bottom:10px;
+  font-weight:900;
+  line-height:1.35;
+  margin-bottom:18px;
 }
 
-.result p{
-  font-size:14px;
+.prize-visual{
+  width:100%;
+  max-width:300px;
+  min-height:160px;
+  margin:0 auto 18px;
+  border-radius:18px;
+  background:
+    linear-gradient(145deg,#f5f5f5,#ececec);
+  border:2px dashed #c8c8c8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
 
+.prize-placeholder{
+  color:#555;
   line-height:1.7;
+  font-weight:700;
 }
 
+.prize-placeholder small{
+  display:block;
+  margin-top:8px;
+  font-size:12px;
+  font-weight:500;
+  color:#888;
+}
+
+.prize-note{
+  font-size:14px;
+  color:#555;
+  line-height:1.8;
+  margin-bottom:18px;
+}
+
+.remaining-box{
+  background:#f4f4f4;
+  border-radius:14px;
+  padding:12px;
+  font-size:13px;
+  color:#444;
+  margin-bottom:16px;
+}
+
+.redeem-button{
+  width:100%;
+  border:none;
+  border-radius:14px;
+  padding:18px 10px;
+  background:#111;
+  color:#fff;
+  font-size:17px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.redeem-button.redeemed{
+  background:#9c9c9c;
+  color:#efefef;
+  cursor:default;
+}
+
+.staff-note{
+  margin-top:10px;
+  font-size:12px;
+  color:#888;
+}
+
+/* =========================
+   在庫一覧
+========================= */
+
+.stock-panel{
+  margin-top:24px;
+  padding:18px 16px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:20px;
+  text-align:left;
+  backdrop-filter:blur(6px);
+}
+
+.stock-panel h3{
+  font-size:15px;
+  margin-bottom:12px;
+  color:#fff;
+}
+
+.stock-list{
+  list-style:none;
+}
+
+.stock-list li{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  font-size:13px;
+  color:#ddd;
+}
+
+.stock-list li:last-child{
+  border-bottom:none;
+}
+
+.stock-name{
+  flex:1;
+  line-height:1.5;
+}
+
+.stock-count{
+  white-space:nowrap;
+  font-weight:800;
+  color:#fff;
+}
 
 /* =========================
    アニメーション
 ========================= */
 
 .machine.running{
-  animation:
-    shake
-    .15s
-    infinite;
+  animation:machineShake .13s infinite;
 }
 
-.machine.running .wheel{
-  animation:
-    spin
-    .42s
-    linear
-    infinite;
+.machine.running .steering{
+  animation:steeringSpin .4s linear infinite;
 }
 
 .machine.running .needle{
-  animation:
-    rev
-    .33s
-    ease-in-out
-    infinite alternate;
+  animation:needleMove .35s ease-in-out infinite alternate;
 }
 
-.machine.done .capsule{
-  animation:
-    drop
-    .65s
-    cubic-bezier(.3,1.5,.4,1)
-    forwards;
+.machine.done .tire{
+  animation:tireDrop .7s cubic-bezier(.3,1.5,.4,1) forwards;
 }
 
-
-@keyframes shake{
-
+@keyframes machineShake{
   0%{
-    transform:
-      translateX(-2px)
-      rotate(-.3deg);
+    transform:translateX(-2px) rotate(-.3deg);
   }
-
   50%{
-    transform:
-      translateX(2px)
-      rotate(.3deg);
+    transform:translateX(2px) rotate(.3deg);
   }
-
   100%{
-    transform:
-      translateX(-2px)
-      rotate(-.3deg);
+    transform:translateX(-2px) rotate(-.3deg);
   }
 }
 
-
-@keyframes spin{
-
+@keyframes steeringSpin{
   from{
-    transform:
-      translateX(-50%)
-      rotate(0deg);
+    transform:translateX(-50%) rotate(0deg);
   }
-
   to{
-    transform:
-      translateX(-50%)
-      rotate(360deg);
+    transform:translateX(-50%) rotate(360deg);
   }
 }
 
-
-@keyframes rev{
-
+@keyframes needleMove{
   from{
-    transform:
-      translateX(-50%)
-      rotate(-120deg);
+    transform:translateX(-50%) rotate(-58deg);
   }
-
   to{
-    transform:
-      translateX(-50%)
-      rotate(115deg);
+    transform:translateX(-50%) rotate(58deg);
   }
 }
 
-
-@keyframes drop{
-
+@keyframes tireDrop{
   0%{
     opacity:0;
-
-    transform:
-      translateX(-50%)
-      translateY(-30px)
-      scale(.2)
-      rotate(0deg);
+    transform:translateX(-50%) translateY(-35px) rotate(0deg) scale(.2);
   }
-
   70%{
     opacity:1;
-
-    transform:
-      translateX(-50%)
-      translateY(6px)
-      scale(1.15)
-      rotate(320deg);
+    transform:translateX(-50%) translateY(6px) rotate(320deg) scale(1.15);
   }
-
   100%{
     opacity:1;
-
-    transform:
-      translateX(-50%)
-      translateY(0)
-      scale(1)
-      rotate(360deg);
+    transform:translateX(-50%) translateY(0) rotate(360deg) scale(1);
   }
 }
 
-
-@keyframes show{
-
+@keyframes resultShow{
   from{
     opacity:0;
-
-    transform:
-      translateY(18px)
-      scale(.96);
+    transform:translateY(20px) scale(.95);
   }
-
   to{
     opacity:1;
-
-    transform:
-      translateY(0)
-      scale(1);
+    transform:translateY(0) scale(1);
   }
 }
 
+@media(max-width:360px){
+  .machine{
+    width:292px;
+  }
+
+  .start-button{
+    max-width:292px;
+  }
+
+  .prize-name{
+    font-size:24px;
+  }
+}
 </style>
 </head>
-
-
 <body>
 
 <div class="wrap">
 
-  <div class="brand">
-    SANNAN MOTOR
-  </div>
-
-  <h1>
-    山南自動車 GACHA
-  </h1>
+  <img src="yamanan.png" class="yamanan-logo" alt="山南自動車">
 
   <div class="lead">
-    友だち登録ありがとうございます
+    LINE友だち登録ありがとうございます。<br>
+    1回抽選にチャレンジできます。
   </div>
 
+  <div class="stock-total" id="stockTotal">
+    残り抽選数：234本
+  </div>
 
-  <div
-    class="machine"
-    id="machine"
-  >
+  <div class="machine" id="machine">
 
     <div class="meter">
+      <div class="red-zone"></div>
 
-      <div class="meterTitle">
-        CHANCE METER
-      </div>
+      <span class="num n0">0</span>
+      <span class="num n20">20</span>
+      <span class="num n40">40</span>
+      <span class="num n60">60</span>
+      <span class="num n80">80</span>
+      <span class="num n100">100</span>
+      <span class="num n120">120</span>
 
-      <div class="gachaText">
-        GACHA
-      </div>
-
-      <div class="rpm">
-        READY TO START
-      </div>
+      <div class="meter-title">CHANCE METER</div>
+      <div class="gacha-text">GACHA</div>
+      <div class="unit">km/h</div>
 
       <div class="needle"></div>
-
+      <div class="needle-center"></div>
     </div>
 
-
-    <div class="wheel">
-
-      <div
-        class="wheelCenter"
-      ></div>
-
+    <div class="steering">
+      <div class="steering-center"></div>
     </div>
 
-
-    <div
-      class="capsule"
-    ></div>
-
+    <div class="tire"></div>
   </div>
 
-
-  <button
-    class="start"
-    id="start"
-  >
+  <button class="start-button" id="startButton">
     ENGINE START
   </button>
 
-
-  <div class="note">
+  <div class="start-note">
     TAP TO CHALLENGE
   </div>
 
+  <div class="result-area" id="resultArea">
+    <div class="result-title" id="resultTitle">1等 当選！</div>
+    <div class="prize-name" id="prizeName">JCBギフト券 20,000円</div>
 
-  <div
-    class="result"
-    id="result"
-  >
+    <div class="prize-visual" id="prizeVisual">
+      <div class="prize-placeholder" id="prizePlaceholder">
+        景品画像 準備中
+        <small>あとで prize1.png ～ prize6.png に差し替え可能</small>
+      </div>
+    </div>
 
-    <h2>
-      🎉 当たり！
-    </h2>
+    <div class="prize-note" id="prizeNote">
+      スタッフにこの画面を提示してください。
+    </div>
 
-    <p>
-      景品をGETしました！<br>
-      スタッフにこの画面を
-      お見せください。
-    </p>
+    <div class="remaining-box" id="remainingBox">
+      この景品の残数：0本<br>
+      全体の残り：0本
+    </div>
 
+    <button class="redeem-button" id="redeemButton">
+      スタッフ確認で引換済みにする
+    </button>
+
+    <div class="staff-note">
+      ※ デモ版です。ページ再読み込みで在庫は初期化されます。
+    </div>
+  </div>
+
+  <div class="stock-panel">
+    <h3>景品残数一覧</h3>
+    <ul class="stock-list" id="stockList"></ul>
   </div>
 
 </div>
 
-
 <script>
-
-const btn =
-  document.getElementById(
-    "start"
-  );
-
-const machine =
-  document.getElementById(
-    "machine"
-  );
-
-const result =
-  document.getElementById(
-    "result"
-  );
-
-
-btn.addEventListener(
-  "click",
-  () => {
-
-    btn.disabled = true;
-
-    btn.textContent =
-      "ENGINE RUNNING...";
-
-
-    result.classList.remove(
-      "show"
-    );
-
-
-    machine.classList.remove(
-      "done"
-    );
-
-
-    machine.classList.add(
-      "running"
-    );
-
-
-    setTimeout(
-      () => {
-
-        machine.classList.remove(
-          "running"
-        );
-
-        machine.classList.add(
-          "done"
-        );
-
-        btn.textContent =
-          "RESULT";
-
-
-        setTimeout(
-          () => {
-
-            result.classList.add(
-              "show"
-            );
-
-          },
-          500
-        );
-
-      },
-      2200
-    );
-
+const prizes = [
+  {
+    id: 1,
+    grade: "1等",
+    name: "JCBギフト券 20,000円",
+    count: 1,
+    note: "高額景品です。スタッフ確認後にお渡しください。",
+    image: ""
+  },
+  {
+    id: 2,
+    grade: "2等",
+    name: "商品券 5,000円",
+    count: 3,
+    note: "スタッフ確認後にお渡しください。",
+    image: ""
+  },
+  {
+    id: 3,
+    grade: "3等",
+    name: "エンジンオイル交換無料券",
+    count: 5,
+    note: "5Lまで対象です。内容確認のうえお渡しください。",
+    image: ""
+  },
+  {
+    id: 4,
+    grade: "4等",
+    name: "山形食品ジュース 5缶セット",
+    count: 10,
+    note: "1,500円相当の景品です。",
+    image: ""
+  },
+  {
+    id: 5,
+    grade: "5等",
+    name: "Hanamori お食事券 1,000円分",
+    count: 15,
+    note: "利用条件がある場合はスタッフからご案内ください。",
+    image: ""
+  },
+  {
+    id: 6,
+    grade: "6等",
+    name: "Hanamori ドリンク券",
+    count: 200,
+    note: "当日限り有効です。",
+    image: ""
   }
-);
+];
 
+const machine = document.getElementById("machine");
+const startButton = document.getElementById("startButton");
+const resultArea = document.getElementById("resultArea");
+const resultTitle = document.getElementById("resultTitle");
+const prizeName = document.getElementById("prizeName");
+const prizeNote = document.getElementById("prizeNote");
+const remainingBox = document.getElementById("remainingBox");
+const redeemButton = document.getElementById("redeemButton");
+const stockTotal = document.getElementById("stockTotal");
+const stockList = document.getElementById("stockList");
+
+let currentPrize = null;
+
+function getTotalRemaining(){
+  return prizes.reduce((sum, prize) => sum + prize.count, 0);
+}
+
+function updateTotalDisplay(){
+  stockTotal.textContent = `残り抽選数：${getTotalRemaining()}本`;
+}
+
+function renderStockList(){
+  stockList.innerHTML = "";
+
+  prizes.forEach(prize => {
+    const li = document.createElement("li");
+
+    const name = document.createElement("div");
+    name.className = "stock-name";
+    name.textContent = `${prize.grade}：${prize.name}`;
+
+    const count = document.createElement("div");
+    count.className = "stock-count";
+    count.textContent = `残り ${prize.count}本`;
+
+    li.appendChild(name);
+    li.appendChild(count);
+    stockList.appendChild(li);
+  });
+
+  updateTotalDisplay();
+}
+
+function getAvailablePrizes(){
+  return prizes.filter(prize => prize.count > 0);
+}
+
+function weightedRandomPrize(){
+  const pool = [];
+
+  prizes.forEach(prize => {
+    for(let i = 0; i < prize.count; i++){
+      pool.push(prize);
+    }
+  });
+
+  if(pool.length === 0){
+    return null;
+  }
+
+  const randomIndex = Math.floor(Math.random() * pool.length);
+  return pool[randomIndex];
+}
+
+function showResult(prize){
+  currentPrize = prize;
+
+  resultTitle.textContent = `${prize.grade} 当選！`;
+  prizeName.textContent = prize.name;
+  prizeNote.textContent = `${prize.note} スタッフにこの画面を提示してください。`;
+
+  remainingBox.innerHTML =
+    `この景品の残数：${prize.count}本<br>全体の残り：${getTotalRemaining()}本`;
+
+  redeemButton.disabled = false;
+  redeemButton.classList.remove("redeemed");
+  redeemButton.textContent = "スタッフ確認で引換済みにする";
+
+  resultArea.classList.add("show");
+}
+
+function soldOutState(){
+  startButton.disabled = true;
+  startButton.textContent = "抽選終了";
+}
+
+startButton.addEventListener("click", function(){
+  if(getTotalRemaining() <= 0){
+    soldOutState();
+    return;
+  }
+
+  resultArea.classList.remove("show");
+  machine.classList.remove("done");
+
+  startButton.disabled = true;
+  startButton.textContent = "ENGINE RUNNING...";
+
+  machine.classList.add("running");
+
+  setTimeout(() => {
+    machine.classList.remove("running");
+    machine.classList.add("done");
+
+    const selectedPrize = weightedRandomPrize();
+
+    if(!selectedPrize){
+      soldOutState();
+      return;
+    }
+
+    selectedPrize.count -= 1;
+    renderStockList();
+    showResult(selectedPrize);
+
+    setTimeout(() => {
+      if(getTotalRemaining() > 0){
+        startButton.disabled = false;
+        startButton.textContent = "TRY AGAIN";
+      }else{
+        soldOutState();
+      }
+    }, 500);
+
+  }, 2400);
+});
+
+redeemButton.addEventListener("click", function(){
+  if(!currentPrize){
+    return;
+  }
+
+  redeemButton.disabled = true;
+  redeemButton.classList.add("redeemed");
+  redeemButton.textContent = "引換済み";
+});
+
+renderStockList();
 </script>
-
 </body>
 </html>
