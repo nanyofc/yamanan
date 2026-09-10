@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>山南自動車 GACHA</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background:
+    radial-gradient(circle at top,#343a40 0%,#111 58%,#050505 100%);
+
+  color:#fff;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:24px 14px;
+}
+
+.wrap{
+  width:100%;
+  max-width:430px;
+  text-align:center;
+}
+
+.brand{
+  font-size:13px;
+  letter-spacing:4px;
+  opacity:.7;
+  margin-bottom:8px;
+}
+
+h1{
+  font-size:30px;
+  letter-spacing:2px;
+  margin-bottom:6px;
+}
+
+.lead{
+  font-size:14px;
+  opacity:.78;
+  margin-bottom:24px;
+}
+
+
+/* =========================
+   ガチャ本体
+========================= */
+
+.machine{
+  position:relative;
+
+  width:320px;
+  height:430px;
+
+  margin:0 auto;
+
+  border-radius:34px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #4b4b4b,
+      #1a1a1a 48%,
+      #070707
+    );
+
+  border:3px solid #5b5b5b;
+
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.7),
+    inset 0 0 28px rgba(255,255,255,.05);
+}
+
+
+/* =========================
+   スピードメーター風
+========================= */
+
+.meter{
+  position:absolute;
+
+  left:50%;
+  top:28px;
+
+  transform:translateX(-50%);
+
+  width:228px;
+  height:228px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #141414 51%,
+      #272727 52%,
+      #090909 70%
+    );
+
+  border:8px solid #202020;
+
+  box-shadow:
+    0 0 0 3px #777,
+    inset 0 0 30px #000;
+}
+
+.meter::before{
+  content:"";
+
+  position:absolute;
+
+  inset:14px;
+
+  border-radius:50%;
+
+  border:
+    4px dashed
+    rgba(255,255,255,.24);
+}
+
+.meterTitle{
+  position:absolute;
+
+  top:60px;
+
+  width:100%;
+
+  font-size:11px;
+
+  letter-spacing:3px;
+
+  opacity:.58;
+}
+
+.gachaText{
+  position:absolute;
+
+  top:92px;
+
+  width:100%;
+
+  font-size:30px;
+  font-weight:900;
+
+  letter-spacing:3px;
+}
+
+.rpm{
+  position:absolute;
+
+  bottom:42px;
+
+  width:100%;
+
+  font-size:10px;
+
+  letter-spacing:3px;
+
+  opacity:.52;
+}
+
+
+/* =========================
+   メーター針
+========================= */
+
+.needle{
+  position:absolute;
+
+  left:50%;
+  top:44px;
+
+  width:6px;
+  height:78px;
+
+  border-radius:6px;
+
+  background:#ff3535;
+
+  transform-origin:50% 70px;
+
+  transform:
+    translateX(-50%)
+    rotate(-125deg);
+}
+
+.needle::after{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  bottom:-4px;
+
+  transform:translateX(-50%);
+
+  width:20px;
+  height:20px;
+
+  border-radius:50%;
+
+  background:#ddd;
+
+  border:6px solid #333;
+}
+
+
+/* =========================
+   ステアリング
+========================= */
+
+.wheel{
+  position:absolute;
+
+  left:50%;
+  top:270px;
+
+  transform:translateX(-50%);
+
+  width:104px;
+  height:104px;
+
+  border-radius:50%;
+
+  border:12px solid #050505;
+
+  box-shadow:
+    0 4px 10px #000,
+    inset 0 0 5px #555;
+}
+
+.wheel::before,
+.wheel::after{
+  content:"";
+
+  position:absolute;
+
+  top:39px;
+
+  width:60px;
+  height:13px;
+
+  background:#080808;
+}
+
+.wheel::before{
+  left:-5px;
+
+  transform:rotate(30deg);
+}
+
+.wheel::after{
+  right:-5px;
+
+  transform:rotate(-30deg);
+}
+
+.wheelCenter{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  width:40px;
+  height:40px;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      #505050,
+      #111
+    );
+
+  border:3px solid #777;
+
+  z-index:3;
+}
+
+
+/* =========================
+   タイヤ風カプセル
+========================= */
+
+.capsule{
+  position:absolute;
+
+  left:50%;
+  bottom:11px;
+
+  transform:
+    translateX(-50%)
+    scale(0);
+
+  width:56px;
+  height:56px;
+
+  border-radius:50%;
+
+  opacity:0;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fff,
+      #ddd 14%,
+      #454545 16%,
+      #111 66%
+    );
+
+  border:5px solid #222;
+}
+
+.capsule::before{
+  content:"";
+
+  position:absolute;
+
+  inset:7px;
+
+  border-radius:50%;
+
+  border:5px solid #333;
+}
+
+.capsule::after{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  width:34px;
+  height:8px;
+
+  border-radius:5px;
+
+  background:#777;
+}
+
+
+/* =========================
+   ENGINE STARTボタン
+========================= */
+
+.start{
+  margin-top:30px;
+
+  width:100%;
+  max-width:320px;
+
+  border:none;
+
+  border-radius:50px;
+
+  padding:20px;
+
+  color:#fff;
+
+  font-size:20px;
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  background:
+    linear-gradient(
+      #ff4848,
+      #b40000
+    );
+
+  box-shadow:
+    0 7px 0 #650000,
+    0 15px 30px rgba(0,0,0,.45);
+
+  cursor:pointer;
+}
+
+.start:active{
+  transform:translateY(5px);
+
+  box-shadow:
+    0 2px 0 #650000;
+}
+
+.start:disabled{
+  cursor:default;
+}
+
+.note{
+  margin-top:14px;
+
+  font-size:10px;
+
+  letter-spacing:4px;
+
+  opacity:.58;
+}
+
+
+/* =========================
+   結果
+========================= */
+
+.result{
+  display:none;
+
+  margin-top:24px;
+
+  padding:24px;
+
+  border-radius:20px;
+
+  background:#fff;
+
+  color:#111;
+
+  box-shadow:
+    0 14px 40px
+    rgba(0,0,0,.5);
+}
+
+.result.show{
+  display:block;
+
+  animation:
+    show
+    .5s ease;
+}
+
+.result h2{
+  font-size:28px;
+
+  margin-bottom:10px;
+}
+
+.result p{
+  font-size:14px;
+
+  line-height:1.7;
+}
+
+
+/* =========================
+   アニメーション
+========================= */
+
+.machine.running{
+  animation:
+    shake
+    .15s
+    infinite;
+}
+
+.machine.running .wheel{
+  animation:
+    spin
+    .42s
+    linear
+    infinite;
+}
+
+.machine.running .needle{
+  animation:
+    rev
+    .33s
+    ease-in-out
+    infinite alternate;
+}
+
+.machine.done .capsule{
+  animation:
+    drop
+    .65s
+    cubic-bezier(.3,1.5,.4,1)
+    forwards;
+}
+
+
+@keyframes shake{
+
+  0%{
+    transform:
+      translateX(-2px)
+      rotate(-.3deg);
+  }
+
+  50%{
+    transform:
+      translateX(2px)
+      rotate(.3deg);
+  }
+
+  100%{
+    transform:
+      translateX(-2px)
+      rotate(-.3deg);
+  }
+}
+
+
+@keyframes spin{
+
+  from{
+    transform:
+      translateX(-50%)
+      rotate(0deg);
+  }
+
+  to{
+    transform:
+      translateX(-50%)
+      rotate(360deg);
+  }
+}
+
+
+@keyframes rev{
+
+  from{
+    transform:
+      translateX(-50%)
+      rotate(-120deg);
+  }
+
+  to{
+    transform:
+      translateX(-50%)
+      rotate(115deg);
+  }
+}
+
+
+@keyframes drop{
+
+  0%{
+    opacity:0;
+
+    transform:
+      translateX(-50%)
+      translateY(-30px)
+      scale(.2)
+      rotate(0deg);
+  }
+
+  70%{
+    opacity:1;
+
+    transform:
+      translateX(-50%)
+      translateY(6px)
+      scale(1.15)
+      rotate(320deg);
+  }
+
+  100%{
+    opacity:1;
+
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scale(1)
+      rotate(360deg);
+  }
+}
+
+
+@keyframes show{
+
+  from{
+    opacity:0;
+
+    transform:
+      translateY(18px)
+      scale(.96);
+  }
+
+  to{
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+  <div class="brand">
+    SANNAN MOTOR
+  </div>
+
+  <h1>
+    山南自動車 GACHA
+  </h1>
+
+  <div class="lead">
+    友だち登録ありがとうございます
+  </div>
+
+
+  <div
+    class="machine"
+    id="machine"
+  >
+
+    <div class="meter">
+
+      <div class="meterTitle">
+        CHANCE METER
+      </div>
+
+      <div class="gachaText">
+        GACHA
+      </div>
+
+      <div class="rpm">
+        READY TO START
+      </div>
+
+      <div class="needle"></div>
+
+    </div>
+
+
+    <div class="wheel">
+
+      <div
+        class="wheelCenter"
+      ></div>
+
+    </div>
+
+
+    <div
+      class="capsule"
+    ></div>
+
+  </div>
+
+
+  <button
+    class="start"
+    id="start"
+  >
+    ENGINE START
+  </button>
+
+
+  <div class="note">
+    TAP TO CHALLENGE
+  </div>
+
+
+  <div
+    class="result"
+    id="result"
+  >
+
+    <h2>
+      🎉 当たり！
+    </h2>
+
+    <p>
+      景品をGETしました！<br>
+      スタッフにこの画面を
+      お見せください。
+    </p>
+
+  </div>
+
+</div>
+
+
+<script>
+
+const btn =
+  document.getElementById(
+    "start"
+  );
+
+const machine =
+  document.getElementById(
+    "machine"
+  );
+
+const result =
+  document.getElementById(
+    "result"
+  );
+
+
+btn.addEventListener(
+  "click",
+  () => {
+
+    btn.disabled = true;
+
+    btn.textContent =
+      "ENGINE RUNNING...";
+
+
+    result.classList.remove(
+      "show"
+    );
+
+
+    machine.classList.remove(
+      "done"
+    );
+
+
+    machine.classList.add(
+      "running"
+    );
+
+
+    setTimeout(
+      () => {
+
+        machine.classList.remove(
+          "running"
+        );
+
+        machine.classList.add(
+          "done"
+        );
+
+        btn.textContent =
+          "RESULT";
+
+
+        setTimeout(
+          () => {
+
+            result.classList.add(
+              "show"
+            );
+
+          },
+          500
+        );
+
+      },
+      2200
+    );
+
+  }
+);
+
+</script>
+
+</body>
+</html>
