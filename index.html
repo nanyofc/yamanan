@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>山南自動車 ガチャ</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;padding:25px 12px 60px;color:#fff;text-align:center;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;
+  background:radial-gradient(circle at top,#292c31,#0d0e10 45%,#020202)
+}
+.wrap{width:100%;max-width:500px;margin:auto}
+.logo{display:block;width:88%;max-width:420px;height:auto;margin:0 auto 20px}
+.lead{font-size:14px;color:#bbb;line-height:1.8;margin-bottom:25px}
+.lead b{color:#fff}
+
+.dashboard{
+  position:relative;width:100%;max-width:480px;margin:auto;padding:18px 4px 12px;
+  overflow:hidden;border:2px solid #353535;border-radius:34px;
+  background:linear-gradient(#181a1e,#050607);
+  box-shadow:inset 0 0 45px #000,0 25px 55px #000
+}
+.dashboard:before{
+  content:"";position:absolute;top:-85px;left:-10%;width:120%;height:160px;
+  border:8px solid #292929;border-radius:50%;opacity:.55
+}
+svg{position:relative;z-index:2;width:100%;display:block}
+
+.ring{fill:#060708;stroke:#777;stroke-width:3}
+.inner{fill:none;stroke:#26282c;stroke-width:7}
+.tick1{stroke:#eee;stroke-width:3.2;stroke-linecap:round}
+.tick2{stroke:#666;stroke-width:1.4;stroke-linecap:round}
+.num{fill:#e6e6e6;font-size:13px;text-anchor:middle}
+.small{fill:#ccc;font-size:10px;text-anchor:middle}
+.unit{fill:#888;font-size:8px;text-anchor:middle}
+.mainneedle{stroke:#fff;stroke-width:4;stroke-linecap:round}
+.sideneedle{stroke:#eee;stroke-width:3;stroke-linecap:round}
+.hub1{fill:#17191d;stroke:#444;stroke-width:3}
+.hub2{fill:#292d35}
+
+.dashboard.rainbow .ring{
+  animation:rainbow .7s linear infinite
+}
+@keyframes rainbow{
+  0%{stroke:#ff1744;filter:drop-shadow(0 0 8px #ff1744)}
+  17%{stroke:#ff9100;filter:drop-shadow(0 0 8px #ff9100)}
+  34%{stroke:#ffee00;filter:drop-shadow(0 0 8px #ffee00)}
+  51%{stroke:#00e676;filter:drop-shadow(0 0 8px #00e676)}
+  68%{stroke:#00b8ff;filter:drop-shadow(0 0 8px #00b8ff)}
+  85%{stroke:#9c4dff;filter:drop-shadow(0 0 8px #9c4dff)}
+  100%{stroke:#ff1744;filter:drop-shadow(0 0 8px #ff1744)}
+}
+
+.start{
+  width:100%;max-width:350px;margin-top:30px;padding:20px 10px;border:0;
+  border-radius:60px;background:linear-gradient(#ee3b3b,#b30000);
+  color:#fff;font-size:20px;font-weight:900;letter-spacing:2px;
+  box-shadow:0 8px 0 #6c0000,0 18px 35px #000
+}
+.start:disabled{opacity:.7}
+
+.result{
+  display:none;margin-top:30px;padding:28px 20px 24px;border-radius:26px;
+  background:#fff;color:#111;box-shadow:0 18px 50px #000
+}
+.result.show{display:block;animation:show .5s ease}
+@keyframes show{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+.grade{font-size:21px;font-weight:900;color:#bd0000;margin-bottom:8px}
+.prizename{font-size:27px;font-weight:900;line-height:1.4;margin-bottom:20px}
+
+.visual{
+  width:100%;max-width:330px;min-height:190px;margin:0 auto 20px;padding:20px;
+  display:flex;align-items:center;justify-content:center;
+  border:2px dashed #ccc;border-radius:18px;background:#eee
+}
+.prizeimg{display:none;width:100%;max-height:280px;object-fit:contain}
+.placeholder{font-size:17px;font-weight:800;color:#555}
+.placeholder small{display:block;font-size:11px;font-weight:400;color:#999;margin-top:8px}
+.note{font-size:14px;color:#555;line-height:1.8;margin-bottom:20px}
+
+.redeem{
+  width:100%;padding:18px;border:0;border-radius:14px;background:#111;
+  color:#fff;font-size:17px;font-weight:900
+}
+.redeem.done{background:#999}
+.demo{font-size:11px;color:#999;margin-top:10px}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<img src="yamanan.png" class="logo" alt="山南自動車">
+
+<div class="lead">
+LINE友だち登録ありがとうございます。<br>
+<b>ENGINE START</b> を押して抽選にチャレンジ！
+</div>
+
+<div class="dashboard" id="dash">
+
+<svg viewBox="0 0 600 300">
+
+<circle cx="135" cy="160" r="100" class="ring"/>
+<circle cx="135" cy="160" r="90" class="inner"/>
+<g id="lt"></g>
+<text x="135" y="105" class="unit">×1000 r/min</text>
+<g id="ln">
+<line x1="135" y1="160" x2="135" y2="86" class="sideneedle"/>
+</g>
+<circle cx="135" cy="160" r="12" class="hub1"/>
+<circle cx="135" cy="160" r="7" class="hub2"/>
+
+<circle cx="300" cy="140" r="128" class="ring"/>
+<circle cx="300" cy="140" r="116" class="inner"/>
+<g id="mt"></g>
+<g id="mn">
+<line x1="300" y1="140" x2="300" y2="38" class="mainneedle"/>
+</g>
+<circle cx="300" cy="140" r="15" class="hub1"/>
+<circle cx="300" cy="140" r="9" class="hub2"/>
+<text x="300" y="230" fill="#ddd" font-size="20" text-anchor="middle">P</text>
+
+<circle cx="465" cy="160" r="100" class="ring"/>
+<circle cx="465" cy="160" r="90" class="inner"/>
+<g id="rt"></g>
+<text x="465" y="105" class="unit">TEMP / FUEL</text>
+<text x="420" y="223" class="small">E</text>
+<text x="510" y="223" class="small">F</text>
+<g id="rn">
+<line x1="465" y1="160" x2="465" y2="86" class="sideneedle"/>
+</g>
+<circle cx="465" cy="160" r="12" class="hub1"/>
+<circle cx="465" cy="160" r="7" class="hub2"/>
+
+</svg>
+</div>
+
+<button class="start" id="start">ENGINE START</button>
+
+<div class="result" id="result">
+<div class="grade" id="grade"></div>
+<div class="prizename" id="prizename"></div>
+
+<div class="visual">
+<img id="prizeimg" class="prizeimg">
+<div id="placeholder" class="placeholder">
+景品画像 準備中
+<small>後から景品画像を追加できます</small>
+</div>
+</div>
+
+<div class="note" id="note"></div>
+
+<button class="redeem" id="redeem">
+スタッフ確認で引換済みにする
+</button>
+
+<div class="demo">※ 現在は動作確認用デモです</div>
+</div>
+
+</div>
+
+<script>
+const prizes=[
+["1等","JCBギフト券 20,000円",1,120,"prize1.png","スタッフにこの画面を提示してください。"],
+["2等","商品券 5,000円",3,110,"prize2.png","スタッフにこの画面を提示してください。"],
+["3等","エンジンオイル交換無料券",5,100,"prize3.png","5Lまで対象です。スタッフにこの画面を提示してください。"],
+["4等","山形食品ジュース 5缶セット",10,60,"prize4.png","1,500円相当。スタッフにこの画面を提示してください。"],
+["5等","Hanamori お食事券 1,000円分",15,60,"prize5.png","スタッフにこの画面を提示してください。"],
+["6等","Hanamori ドリンク券",200,60,"prize6.png","当日限り有効です。スタッフにこの画面を提示してください。"]
+];
+
+function ticks(id,cx,cy,r,a1,a2,n,sub,labels){
+ const g=document.getElementById(id),total=n*sub;
+ for(let i=0;i<=total;i++){
+  const q=i/total,a=a1+(a2-a1)*q,rad=(a-90)*Math.PI/180,major=i%sub===0;
+  const o=r,inn=r-(major?14:7);
+  const line=document.createElementNS("http://www.w3.org/2000/svg","line");
+  line.setAttribute("x1",cx+o*Math.cos(rad));
+  line.setAttribute("y1",cy+o*Math.sin(rad));
+  line.setAttribute("x2",cx+inn*Math.cos(rad));
+  line.setAttribute("y2",cy+inn*Math.sin(rad));
+  line.setAttribute("class",major?"tick1":"tick2");
+  g.appendChild(line);
+  if(major&&labels){
+   const k=i/sub;
+   if(labels[k]!==undefined){
+    const tr=r-31,t=document.createElementNS("http://www.w3.org/2000/svg","text");
+    t.setAttribute("x",cx+tr*Math.cos(rad));
+    t.setAttribute("y",cy+tr*Math.sin(rad)+5);
+    t.setAttribute("class","num");
+    t.textContent=labels[k];
+    g.appendChild(t);
+   }
+  }
+ }
+}
+
+ticks("mt",300,140,108,-125,125,9,4,["0","20","40","60","80","100","120","140","160","180"]);
+ticks("lt",135,160,82,-130,130,6,4,["0","1","2","3","4","5","6"]);
+ticks("rt",465,160,82,-130,130,6,4,null);
+
+const dash=document.getElementById("dash");
+const mn=document.getElementById("mn");
+const ln=document.getElementById("ln");
+const rn=document.getElementById("rn");
+const start=document.getElementById("start");
+const result=document.getElementById("result");
+const grade=document.getElementById("grade");
+const prizename=document.getElementById("prizename");
+const prizeimg=document.getElementById("prizeimg");
+const placeholder=document.getElementById("placeholder");
+const note=document.getElementById("note");
+const redeem=document.getElementById("redeem");
+
+function mainSpeed(s){
+ const a=-125+(s/180)*250;
+ mn.setAttribute("transform",`rotate(${a} 300 140)`);
+}
+function left(a){ln.setAttribute("transform",`rotate(${a} 135 160)`)}
+function right(a){rn.setAttribute("transform",`rotate(${a} 465 160)`)}
+
+function reset(){
+ mainSpeed(0);left(-125);right(42);dash.classList.remove("rainbow");
+}
+reset();
+
+function draw(){
+ let total=prizes.reduce((a,p)=>a+p[2],0),r=Math.random()*total;
+ for(const p of prizes){r-=p[2];if(r<0)return p}
+ return prizes[5];
+}
+
+function ease(t){
+ return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+}
+
+function animate(prize){
+ return new Promise(done=>{
+  const target=prize[3],high=target>=100,duration=5200,startTime=performance.now();
+
+  function frame(now){
+   const p=Math.min((now-startTime)/duration,1),e=ease(p),speed=target*e;
+
+   mainSpeed(speed);
+
+   const lt=-125+(target/120)*145;
+   left(-125+(lt+125)*e);
+
+   right(42+(58-42)*e);
+
+   if(high&&speed>=20)dash.classList.add("rainbow");
+
+   if(p<1){
+    requestAnimationFrame(frame);
+   }else{
+    mainSpeed(target);
+    left(lt);
+    right(58);
+    done();
+   }
+  }
+  requestAnimationFrame(frame);
+ });
+}
+
+function show(p){
+ grade.textContent=p[0]+" 当選！";
+ prizename.textContent=p[1];
+ note.textContent=p[5];
+
+ prizeimg.style.display="none";
+ placeholder.style.display="block";
+ prizeimg.src=p[4];
+
+ prizeimg.onload=()=>{
+  placeholder.style.display="none";
+  prizeimg.style.display="block";
+ };
+
+ prizeimg.onerror=()=>{
+  prizeimg.style.display="none";
+  placeholder.style.display="block";
+ };
+
+ result.classList.add("show");
+
+ setTimeout(()=>{
+  result.scrollIntoView({behavior:"smooth",block:"start"});
+ },300);
+}
+
+start.onclick=async()=>{
+ result.classList.remove("show");
+ reset();
+
+ redeem.disabled=false;
+ redeem.classList.remove("done");
+ redeem.textContent="スタッフ確認で引換済みにする";
+
+ const prize=draw();
+
+ start.disabled=true;
+ start.textContent="ENGINE RUNNING...";
+
+ await animate(prize);
+
+ await new Promise(r=>setTimeout(r,1200));
+
+ show(prize);
+
+ start.disabled=false;
+ start.textContent="DEMO AGAIN";
+};
+
+redeem.onclick=()=>{
+ redeem.disabled=true;
+ redeem.classList.add("done");
+ redeem.textContent="引換済み";
+};
+</script>
+
+</body>
+</html>
